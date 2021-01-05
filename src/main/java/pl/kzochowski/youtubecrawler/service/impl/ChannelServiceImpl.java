@@ -9,6 +9,7 @@ import pl.kzochowski.youtubecrawler.persistence.util.YoutubeConstants;
 import pl.kzochowski.youtubecrawler.service.ChannelService;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -20,6 +21,11 @@ public class ChannelServiceImpl implements ChannelService {
 
     @Override
     public Channel saveChannel(Channel channel) {
+        Optional<Channel> temp = channelRepository.findById(channel.getId());
+        temp.ifPresent(theChannel -> {
+            throw new ChannelAlreadyExistsException(theChannel.getId());
+        });
+
         fillChannel(channel);
         channelRepository.save(channel);
         log.info("Channel {} saved", channel.getId());
@@ -31,6 +37,13 @@ public class ChannelServiceImpl implements ChannelService {
     public Optional<Channel> fetchChannelToCrawl() {
         //todo get from repository, add lastExecution and save
         return Optional.empty();
+    }
+
+    @Override
+    public List<Channel> listAll() {
+        List<Channel> channels = channelRepository.findAll();
+        log.info("Listing all channels");
+        return channels;
     }
 
     private void fillChannel(Channel channel) {

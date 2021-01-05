@@ -2,19 +2,18 @@ package pl.kzochowski.youtubecrawler.api;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.kzochowski.youtubecrawler.api.util.Respond;
 import pl.kzochowski.youtubecrawler.api.util.Response;
 import pl.kzochowski.youtubecrawler.persistence.model.Channel;
 import pl.kzochowski.youtubecrawler.service.ChannelService;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("channel")
+@RequestMapping("channels")
 @RequiredArgsConstructor
 public class ChannelEndpoint {
 
@@ -23,7 +22,13 @@ public class ChannelEndpoint {
     @PostMapping
     public ResponseEntity<Response> save(@RequestBody @Valid Channel newChannel) {
         Channel channel = channelService.saveChannel(newChannel);
-        return Respond.ok(channel);
+        return Respond.created(channel);
+    }
+
+    @GetMapping
+    public ResponseEntity<Response> list() {
+        List<Channel> channels = channelService.listAll();
+        return Respond.ok(channels, "All channels listed");
     }
 
 }

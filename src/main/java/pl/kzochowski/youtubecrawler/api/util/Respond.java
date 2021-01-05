@@ -5,10 +5,11 @@ import org.springframework.http.ResponseEntity;
 
 public class Respond {
 
-    public static <T> ResponseEntity<Response> ok(T val){
+    public static <T> ResponseEntity<Response> ok(T val, String message){
         return new ResponseEntity<>(Response.builder()
                 .code(String.valueOf(HttpStatus.OK))
                 .data(val)
+                .message(message)
                 .build(), HttpStatus.OK);
     }
 
@@ -16,6 +17,7 @@ public class Respond {
         return new ResponseEntity<>(Response.builder()
                 .code(String.valueOf(HttpStatus.CREATED))
                 .data(val)
+                .message("New channel added")
                 .build(), HttpStatus.CREATED);
     }
 
