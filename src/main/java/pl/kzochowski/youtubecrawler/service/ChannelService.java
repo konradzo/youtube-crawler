@@ -6,6 +6,8 @@ import java.util.Optional;
 
 public interface ChannelService {
 
+    Channel saveChannel(Channel channel);
+
     Optional<Channel> fetchChannelToCrawl();
 
 }
