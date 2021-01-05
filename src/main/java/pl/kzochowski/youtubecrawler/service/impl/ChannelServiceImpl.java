@@ -9,6 +9,7 @@ import pl.kzochowski.youtubecrawler.persistence.util.YoutubeConstants;
 import pl.kzochowski.youtubecrawler.service.ChannelService;
 
 import javax.transaction.Transactional;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,8 +36,13 @@ public class ChannelServiceImpl implements ChannelService {
     @Transactional
     @Override
     public Optional<Channel> fetchChannelToCrawl() {
-        //todo get from repository, add lastExecution and save
-        return Optional.empty();
+        Optional<Channel> channel = channelRepository.findFirstByOrderByLastExecutionAsc();
+        channel.ifPresent(theChannel -> {
+                    theChannel.setLastExecution(ZonedDateTime.now());
+                    channelRepository.save(theChannel);
+                }
+        );
+        return channel;
     }
 
     @Override
