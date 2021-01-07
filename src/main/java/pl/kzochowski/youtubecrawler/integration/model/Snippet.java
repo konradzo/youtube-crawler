@@ -1,7 +1,12 @@
 package pl.kzochowski.youtubecrawler.integration.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.ZonedDateTime;
 
+@Getter
+@Setter
 public class Snippet {
     private ZonedDateTime publishedAt;
     private String channelId;
@@ -9,6 +14,6 @@ public class Snippet {
     private String description;
     private Thumbnails thumbnails;
     private String channelTitle;
-    private String liveBroadCastContent;
+    private String liveBroadcastContent;
     private ZonedDateTime publishTime;
 }

@@ -20,22 +20,22 @@ public class YoutubeCrawlerApplication {
 		SpringApplication.run(YoutubeCrawlerApplication.class, args);
 	}
 
-//	@Bean
-//	public IntegrationFlow integrationFlowVideos(ChannelProducer channelProducer,
-//												 VideoHandler videoHandler,
-//												 ChannelVideosTransformer videosTransformer,
-//												 ElasticChannel elasticChannel){
-//		return IntegrationFlows
-//				.from(channelProducer, e -> e.poller(p -> {
-//					PollerSpec pollerSpec = p.fixedDelay(60, TimeUnit.SECONDS);
-////					pollerSpec.errorHandler(errorHandler);
-//					return pollerSpec;
-//				}))
-//				.handle(videoHandler)
-////				.filter(emptyListFilter)
-//				.transform(videosTransformer)
-//				.channel(elasticChannel)
-//				.get();
-//	}
+	@Bean
+	public IntegrationFlow integrationFlowVideos(ChannelProducer channelProducer,
+												 VideoHandler videoHandler,
+												 ChannelVideosTransformer videosTransformer,
+												 ElasticChannel elasticChannel){
+		return IntegrationFlows
+				.from(channelProducer, e -> e.poller(p -> {
+					PollerSpec pollerSpec = p.fixedDelay(60, TimeUnit.SECONDS);
+//					pollerSpec.errorHandler(errorHandler);
+					return pollerSpec;
+				}))
+				.handle(videoHandler)
+//				.filter(emptyListFilter)
+				.transform(videosTransformer)
+				.channel(elasticChannel)
+				.get();
+	}
 
 }
