@@ -11,3 +11,5 @@ spring:
       hibernate:
         jdbc:
           time_zone: Europe/Warsaw
+
+daysLimit: 30
