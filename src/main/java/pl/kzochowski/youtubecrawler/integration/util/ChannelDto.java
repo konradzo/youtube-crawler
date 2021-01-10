@@ -2,7 +2,7 @@ package pl.kzochowski.youtubecrawler.integration.util;
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.kzochowski.youtubecrawler.integration.model.Document;
+import pl.kzochowski.youtubecrawler.integration.model.VideoDto;
 import pl.kzochowski.youtubecrawler.persistence.model.Channel;
 
 import java.util.ArrayList;
@@ -13,10 +13,10 @@ import java.util.List;
 public class ChannelDto {
 
     private Channel channel;
-    private List<Document> documents;
+    private List<VideoDto> videoDtos;
 
     public ChannelDto(Channel channel) {
         this.channel = channel;
-        this.documents = new ArrayList<>();
+        this.videoDtos = new ArrayList<>();
     }
 }

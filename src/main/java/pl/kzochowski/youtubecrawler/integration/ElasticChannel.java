@@ -7,6 +7,7 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.stereotype.Component;
 import pl.kzochowski.youtubecrawler.integration.model.Document;
 import pl.kzochowski.youtubecrawler.integration.service.ElasticsearchSenderService;
+import pl.kzochowski.youtubecrawler.integration.util.ChannelDto;
 
 import java.util.List;
 
