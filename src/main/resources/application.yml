@@ -1,6 +1,7 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/youtube-crawler
+    # add user and password
     username: postgres
     password: postgres
   jpa:
@@ -11,5 +12,9 @@ spring:
       hibernate:
         jdbc:
           time_zone: Europe/Warsaw
+
+server:
+  servlet:
+    context-path: /api
 
 daysLimit: 30

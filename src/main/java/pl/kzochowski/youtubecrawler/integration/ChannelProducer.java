@@ -27,6 +27,8 @@ public class ChannelProducer extends IntegrationObjectSupport implements Message
             ChannelDto channelDto = new ChannelDto(channel.get());
             log.info("Crawling channel: {}", channel.get().getUrl());
             return MessageBuilder.withPayload(channelDto).build();
+        } else {
+            log.info("No channel to crawl");
         }
         return null;
     }

@@ -7,13 +7,8 @@ import org.springframework.stereotype.Component;
 import pl.kzochowski.youtubecrawler.integration.model.*;
 import pl.kzochowski.youtubecrawler.integration.service.VideoFetcher;
 import pl.kzochowski.youtubecrawler.integration.util.ChannelDto;
-import pl.kzochowski.youtubecrawler.persistence.util.YoutubeConstants;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static pl.kzochowski.youtubecrawler.integration.IntegrationConstants.YOUTUBE_CHANNEL_URL_PREFIX;
-import static pl.kzochowski.youtubecrawler.integration.IntegrationConstants.YOUTUBE_VIDEO_URL_PREFIX;
 
 @Component
 @RequiredArgsConstructor

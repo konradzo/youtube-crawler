@@ -5,7 +5,9 @@ import org.springframework.http.ResponseEntity;
 
 public class Respond {
 
-    public static <T> ResponseEntity<Response> ok(T val, String message){
+    //todo message? data?
+
+    public static <T> ResponseEntity<Response> ok(T val, String message) {
         return new ResponseEntity<>(Response.builder()
                 .code(String.valueOf(HttpStatus.OK))
                 .data(val)
@@ -13,15 +15,22 @@ public class Respond {
                 .build(), HttpStatus.OK);
     }
 
-    public static <T> ResponseEntity<Response> created(T val){
+    public static <T> ResponseEntity<Response> created(T val) {
         return new ResponseEntity<>(Response.builder()
                 .code(String.valueOf(HttpStatus.CREATED))
                 .data(val)
-                .message("New channel added")
+                .message("New entity created")
                 .build(), HttpStatus.CREATED);
     }
 
-    public static ResponseEntity<Response> badRequest(String message){
+    public static ResponseEntity<Response> entityAlreadyExists(String entityType) {
+        return new ResponseEntity<>(Response.builder()
+                .code(String.valueOf(HttpStatus.CONFLICT))
+                .message(String.format("Provided %s already exists", entityType))
+                .build(), HttpStatus.CONFLICT);
+    }
+
+    public static ResponseEntity<Response> badRequest(String message) {
         return new ResponseEntity<>(Response.builder()
                 .code(String.valueOf(HttpStatus.BAD_REQUEST))
                 .message(message)
