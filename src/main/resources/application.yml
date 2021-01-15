@@ -18,3 +18,5 @@ server:
     context-path: /api
 
 daysLimit: 30
+
+index-prefix: doc

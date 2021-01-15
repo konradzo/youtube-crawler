@@ -10,5 +10,4 @@ import lombok.Setter;
 public class Author {
     private String name;
     private String url;
-
 }
