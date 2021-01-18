@@ -1,26 +1,29 @@
 package pl.kzochowski.youtubecrawler.integration.config;
 
 import org.apache.http.HttpHost;
-import org.elasticsearch.client.Client;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.client.transport.TransportClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ElasticsearchConfiguration {
 
+    @Value("${elasticsearch.host}")
+    private String host;
+
+    @Value("${elasticsearch.port}")
+    private int port;
+
+    @Value("${elasticsearch.scheme}")
+    private String scheme;
+
     @Bean
     public RestHighLevelClient client() {
-        return buildClient();
-    }
-
-    private RestHighLevelClient buildClient() {
-
         return new RestHighLevelClient(
                 RestClient.builder(
-                        new HttpHost("localhost", 9200, "http"))
+                        new HttpHost(host, port, scheme))
         );
     }
 

@@ -23,10 +23,10 @@ public class Respond {
                 .build(), HttpStatus.CREATED);
     }
 
-    public static ResponseEntity<Response> entityAlreadyExists(String entityType) {
+    public static ResponseEntity<Response> entityAlreadyExists(String message) {
         return new ResponseEntity<>(Response.builder()
                 .code(String.valueOf(HttpStatus.CONFLICT))
-                .message(String.format("Provided %s already exists", entityType))
+                .message(message)
                 .build(), HttpStatus.CONFLICT);
     }
 

@@ -13,7 +13,6 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class VideoHandler implements GenericHandler<ChannelDto> {
-
     private final VideoFetcher videoFetcher;
 
     @Override

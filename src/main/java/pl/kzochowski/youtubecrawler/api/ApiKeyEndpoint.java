@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import pl.kzochowski.youtubecrawler.api.util.Respond;
 import pl.kzochowski.youtubecrawler.api.util.Response;
 import pl.kzochowski.youtubecrawler.persistence.model.ApiKey;
-import pl.kzochowski.youtubecrawler.persistence.repository.ApiKeyRepository;
 import pl.kzochowski.youtubecrawler.service.ApiKeyService;
 
 import javax.validation.Valid;
@@ -16,7 +15,6 @@ import java.util.List;
 @RequestMapping("keys")
 @RequiredArgsConstructor
 public class ApiKeyEndpoint {
-
     private final ApiKeyService apiKeyService;
 
     @PostMapping

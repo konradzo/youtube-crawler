@@ -54,5 +54,4 @@ public class ChannelVideosTransformer extends AbstractPayloadTransformer<Channel
     private String videoUrl(VideoDto videoDto) {
         return YOUTUBE_VIDEO_URL_PREFIX + videoDto.getVideo().getId().getVideoId();
     }
-
 }

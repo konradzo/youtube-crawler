@@ -49,6 +49,7 @@ public class VideoFetcher {
         log.info("Api key switched to: {}", currentApiKey.getKey());
     }
 
+    //todo refactor
     private void fetchVideos(String requestUrl, List<VideoDto> result, Channel channel) {
         String nextPageToken = null;
         try {

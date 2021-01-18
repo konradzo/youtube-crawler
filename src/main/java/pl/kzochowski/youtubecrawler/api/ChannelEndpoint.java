@@ -10,13 +10,11 @@ import pl.kzochowski.youtubecrawler.service.ChannelService;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("channels")
 @RequiredArgsConstructor
 public class ChannelEndpoint {
-
     private final ChannelService channelService;
 
     @PostMapping

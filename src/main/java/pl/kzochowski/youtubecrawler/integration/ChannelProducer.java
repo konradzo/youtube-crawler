@@ -17,7 +17,6 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 public class ChannelProducer extends IntegrationObjectSupport implements MessageSource<ChannelDto> {
-
     private final ChannelService channelService;
 
     @Override

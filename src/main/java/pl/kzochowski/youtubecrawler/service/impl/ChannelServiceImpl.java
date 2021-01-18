@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.kzochowski.youtubecrawler.persistence.model.Channel;
 import pl.kzochowski.youtubecrawler.persistence.repository.ChannelRepository;
-import pl.kzochowski.youtubecrawler.persistence.util.YoutubeConstants;
 import pl.kzochowski.youtubecrawler.service.ChannelService;
 
 import javax.transaction.Transactional;
@@ -13,11 +12,12 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import static pl.kzochowski.youtubecrawler.integration.IntegrationConstants.YOUTUBE_CHANNEL_URL_PREFIX;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class ChannelServiceImpl implements ChannelService {
-
     private final ChannelRepository channelRepository;
 
     @Override
@@ -54,6 +54,6 @@ public class ChannelServiceImpl implements ChannelService {
 
     private void fillChannel(Channel channel) {
         channel.setEnabledToCrawl(true);
-        channel.setUrl(YoutubeConstants.YOUTUBE_CHANNEL_URL_PREFIX + channel.getId());
+        channel.setUrl(YOUTUBE_CHANNEL_URL_PREFIX + channel.getId());
     }
 }
