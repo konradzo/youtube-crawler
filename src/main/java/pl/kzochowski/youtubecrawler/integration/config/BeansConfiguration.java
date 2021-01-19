@@ -13,7 +13,6 @@ public class BeansConfiguration {
 
     @Bean
     public RestTemplate restTemplate() {
-        //todo configure
         return new RestTemplate();
     }
 

@@ -111,7 +111,7 @@ public class VideoFetcher {
         builder.setPath("youtube/v3/videos");
         builder.addParameter("part", "statistics");
         builder.addParameter("id", idList);
-        builder.addParameter("key", "AIzaSyBF92vIWTSyoM7irbvvXsUUhA1VkOuVI00");
+        builder.addParameter("key", currentApiKey.getKey());
         return URLDecoder.decode(builder.toString(), StandardCharsets.UTF_8.toString());
     }
 

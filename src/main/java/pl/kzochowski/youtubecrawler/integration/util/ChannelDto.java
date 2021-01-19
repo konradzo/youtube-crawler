@@ -11,7 +11,6 @@ import java.util.List;
 @Getter
 @Setter
 public class ChannelDto {
-
     private Channel channel;
     private List<VideoDto> videoDtos;
 
