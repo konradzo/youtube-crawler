@@ -1,16 +1,17 @@
 package pl.kzochowski.youtubecrawler.api.util;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
-@Builder
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Response {
-    private String code;
+public class ErrorMessage {
     private String message;
-    private Object data;
+    private LocalDateTime timestamp;
 }

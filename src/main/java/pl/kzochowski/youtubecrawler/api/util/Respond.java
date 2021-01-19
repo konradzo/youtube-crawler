@@ -5,8 +5,6 @@ import org.springframework.http.ResponseEntity;
 
 public class Respond {
 
-    //todo message? data?
-
     public static <T> ResponseEntity<Response> ok(T val, String message) {
         return new ResponseEntity<>(Response.builder()
                 .code(String.valueOf(HttpStatus.OK))
@@ -23,17 +21,19 @@ public class Respond {
                 .build(), HttpStatus.CREATED);
     }
 
-    public static ResponseEntity<Response> entityAlreadyExists(String message) {
+    public static ResponseEntity<Response> entityAlreadyExists(ErrorMessage errorMessage, String message) {
         return new ResponseEntity<>(Response.builder()
                 .code(String.valueOf(HttpStatus.CONFLICT))
+                .data(errorMessage)
                 .message(message)
                 .build(), HttpStatus.CONFLICT);
     }
 
-    public static ResponseEntity<Response> badRequest(String message) {
+    public static ResponseEntity<Response> badRequest(ErrorMessage errorMessage, String message) {
         return new ResponseEntity<>(Response.builder()
                 .code(String.valueOf(HttpStatus.BAD_REQUEST))
                 .message(message)
+                .data(errorMessage)
                 .build(), HttpStatus.BAD_REQUEST);
     }
 }
