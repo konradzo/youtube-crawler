@@ -9,6 +9,7 @@ import pl.kzochowski.youtubecrawler.integration.model.Metadata;
 import pl.kzochowski.youtubecrawler.integration.model.VideoDto;
 import pl.kzochowski.youtubecrawler.integration.util.ChannelDto;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,9 +23,16 @@ public class ChannelVideosTransformer extends AbstractPayloadTransformer<Channel
     @Override
     protected List<Document> transformPayload(ChannelDto channelDto) {
         log.info("Converting list with {} videos, channelId: {}", channelDto.getVideoDtos().size(), channelDto.getChannel().getId());
-        List<Document> documents = channelDto.getVideoDtos().stream().map(videoDto -> convertVideoToDocument(videoDto)).collect(Collectors.toList());
+        List<Document> documents = filterByDate(channelDto).stream().map(this::convertVideoToDocument).collect(Collectors.toList());
         log.info("Documents converted");
         return documents;
+    }
+
+    private List<VideoDto> filterByDate(ChannelDto channelDto) {
+        List<VideoDto> videoDtos = channelDto.getVideoDtos();
+        return videoDtos.stream()
+                .filter(videoDto -> videoDto.getVideo().getSnippet().getPublishedAt().isAfter(ZonedDateTime.now().minusMonths(12)))
+                .collect(Collectors.toList());
     }
 
     private Document convertVideoToDocument(VideoDto videoDto) {
