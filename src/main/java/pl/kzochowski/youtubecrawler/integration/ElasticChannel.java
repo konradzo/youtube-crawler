@@ -29,7 +29,7 @@ public class ElasticChannel implements MessageChannel {
     private final ObjectMapper mapper = new ObjectMapper().addMixIn(Document.class, DocumentMixin.class);
     private BulkRequest bulkRequest = new BulkRequest().setRefreshPolicy(WriteRequest.RefreshPolicy.IMMEDIATE);
 
-    @Value("${index-prefix:doc}")
+    @Value("${index-prefix:sm-}")
     private String indexPrefix;
 
     @Override

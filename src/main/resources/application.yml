@@ -19,7 +19,7 @@ server:
 
 daysLimit: 30
 
-index-prefix: doc
+index-prefix: sm-
 
 username: admin
 password: admin
