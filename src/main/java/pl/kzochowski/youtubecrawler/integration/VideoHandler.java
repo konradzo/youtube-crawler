@@ -5,7 +5,7 @@ import org.springframework.integration.handler.GenericHandler;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.stereotype.Component;
 import pl.kzochowski.youtubecrawler.integration.model.*;
-import pl.kzochowski.youtubecrawler.integration.service.VideoFetcher;
+import pl.kzochowski.youtubecrawler.service.VideoFetcher;
 import pl.kzochowski.youtubecrawler.integration.util.ChannelDto;
 
 import java.util.List;

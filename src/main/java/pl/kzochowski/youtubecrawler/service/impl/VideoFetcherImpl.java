@@ -1,4 +1,4 @@
-package pl.kzochowski.youtubecrawler.integration.service;
+package pl.kzochowski.youtubecrawler.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,9 +10,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import pl.kzochowski.youtubecrawler.integration.model.*;
+import pl.kzochowski.youtubecrawler.service.ApiKeyService;
+import pl.kzochowski.youtubecrawler.service.VideoFetcher;
 import pl.kzochowski.youtubecrawler.persistence.model.ApiKey;
 import pl.kzochowski.youtubecrawler.persistence.model.Channel;
-import pl.kzochowski.youtubecrawler.service.ApiKeyService;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class VideoFetcher {
+public class VideoFetcherImpl implements VideoFetcher {
     private final RestTemplate restTemplate;
     private final ApiKeyService apiKeyService;
     private ApiKey currentApiKey;

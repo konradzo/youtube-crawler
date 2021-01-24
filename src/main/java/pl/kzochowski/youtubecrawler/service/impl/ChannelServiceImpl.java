@@ -3,9 +3,9 @@ package pl.kzochowski.youtubecrawler.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import pl.kzochowski.youtubecrawler.service.ChannelService;
 import pl.kzochowski.youtubecrawler.persistence.model.Channel;
 import pl.kzochowski.youtubecrawler.persistence.repository.ChannelRepository;
-import pl.kzochowski.youtubecrawler.service.ChannelService;
 
 import javax.transaction.Transactional;
 import java.time.ZonedDateTime;
