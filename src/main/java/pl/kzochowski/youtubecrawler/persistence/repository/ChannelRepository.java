@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface ChannelRepository extends JpaRepository<Channel, String> {
 
-    Optional<Channel> findFirstByOrderByLastExecutionAsc();
+    Optional<Channel> findFirstByEnabledToCrawlOrderByLastExecutionAsc(boolean enabled);
+
 }

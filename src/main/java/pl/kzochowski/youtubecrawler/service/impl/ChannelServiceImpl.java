@@ -36,7 +36,7 @@ public class ChannelServiceImpl implements ChannelService {
     @Transactional
     @Override
     public Optional<Channel> fetchChannelToCrawl() {
-        Optional<Channel> channel = channelRepository.findFirstByOrderByLastExecutionAsc();
+        Optional<Channel> channel = channelRepository.findFirstByEnabledToCrawlOrderByLastExecutionAsc(true);
         channel.ifPresent(theChannel -> {
                     theChannel.setLastExecution(ZonedDateTime.now());
                     channelRepository.save(theChannel);

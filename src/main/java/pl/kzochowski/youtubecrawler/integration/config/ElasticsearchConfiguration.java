@@ -19,7 +19,7 @@ public class ElasticsearchConfiguration {
     @Value("${elasticsearch.scheme}")
     private String scheme;
 
-    @Bean
+    @Bean(name = "client")
     public RestHighLevelClient client() {
         return new RestHighLevelClient(
                 RestClient.builder(
