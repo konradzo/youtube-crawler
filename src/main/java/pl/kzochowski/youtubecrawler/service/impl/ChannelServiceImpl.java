@@ -2,6 +2,7 @@ package pl.kzochowski.youtubecrawler.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.kzochowski.youtubecrawler.service.ChannelService;
 import pl.kzochowski.youtubecrawler.persistence.model.Channel;
@@ -28,9 +29,9 @@ public class ChannelServiceImpl implements ChannelService {
         });
 
         fillChannel(channel);
-        channelRepository.save(channel);
+        Channel saved = channelRepository.save(channel);
         log.info("Channel {} saved", channel.getId());
-        return channel;
+        return saved;
     }
 
     @Transactional
