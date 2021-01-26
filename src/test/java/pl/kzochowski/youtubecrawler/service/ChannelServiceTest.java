@@ -39,6 +39,7 @@ public class ChannelServiceTest {
 
         // then
         assertEquals(createdChannel, result);
+
     }
 
 
@@ -137,7 +138,4 @@ public class ChannelServiceTest {
         return channel;
     }
 
-    private List<Channel> channelsSavedBefore() {
-        return Arrays.asList(aSavedBefore(), bSavedBefore());
-    }
 }
