@@ -15,7 +15,6 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class ApiKeyServiceImpl implements ApiKeyService {
-
     private final ApiKeyRepository apiKeyRepository;
 
     @Override
@@ -24,8 +23,8 @@ public class ApiKeyServiceImpl implements ApiKeyService {
         key.ifPresent(k -> {
             throw new ApiKeyAlreadyAddedException(k.getKey());
         });
-        apiKeyRepository.save(apiKey);
-        return apiKey;
+        return apiKeyRepository.save(apiKey);
+
     }
 
     @Override

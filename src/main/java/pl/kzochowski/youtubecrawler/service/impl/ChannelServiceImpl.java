@@ -29,9 +29,7 @@ public class ChannelServiceImpl implements ChannelService {
         });
 
         fillChannel(channel);
-        Channel saved = channelRepository.save(channel);
-        log.info("Channel {} saved", channel.getId());
-        return saved;
+        return channelRepository.save(channel);
     }
 
     @Transactional
