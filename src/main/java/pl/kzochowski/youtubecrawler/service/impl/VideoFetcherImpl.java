@@ -47,15 +47,14 @@ public class VideoFetcherImpl implements VideoFetcher {
         log.info("Api key switched to: {}", currentApiKey.getKey());
     }
 
-    //todo refactor
     private void fetchVideos(String requestUrl, List<VideoDto> result, Channel channel) {
         String nextPageToken = null;
         try {
             ResponseEntity<VideoResultPageJson> resultEntity = restTemplate.getForEntity(requestUrl, VideoResultPageJson.class);
-            List<Video> videos = new ArrayList<>(resultEntity.getBody().getItems());
+            List<Video> videos = new ArrayList<>(Objects.requireNonNull(resultEntity.getBody()).getItems());
 
             ResponseEntity<VideoStatsJson> statsEntity = restTemplate.getForEntity(fetcherUtil.prepareStatisticsQueryUrl(videos, currentApiKey), VideoStatsJson.class);
-            List<VideoDto> dtoList = fetcherUtil.prepareVideoListWithData(videos, statsEntity.getBody().getItems());
+            List<VideoDto> dtoList = fetcherUtil.prepareVideoListWithData(videos, Objects.requireNonNull(statsEntity.getBody()).getItems());
             result.addAll(dtoList);
             if (checkDateCondition(resultEntity.getBody())) {
                 nextPageToken = resultEntity.getBody().getNextPageToken();
@@ -68,7 +67,6 @@ public class VideoFetcherImpl implements VideoFetcher {
                 switchApiKey();
             }
         } catch (Exception e) {
-            //todo
             e.printStackTrace();
         }
         if (Objects.nonNull(nextPageToken)) {
