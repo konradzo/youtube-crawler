@@ -13,6 +13,8 @@ public interface ChannelService {
 
     List<Channel> listAll();
 
+    void updateChannelWhenErrorOccur(Channel channel);
+
     class ChannelAlreadyExistsException extends RuntimeException {
         public ChannelAlreadyExistsException(String id) {
             super(String.format("Channel with id %s already exists", id));

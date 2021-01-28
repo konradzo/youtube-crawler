@@ -50,25 +50,29 @@ public class VideoFetcherImpl implements VideoFetcher {
     private void fetchVideos(String requestUrl, List<VideoDto> result, Channel channel) {
         String nextPageToken = null;
         try {
-            ResponseEntity<VideoResultPageJson> resultEntity = restTemplate.getForEntity(requestUrl, VideoResultPageJson.class);
+            ResponseEntity<VideoResultPageJson> resultEntity = sendRequest(requestUrl, VideoResultPageJson.class);
             List<Video> videos = new ArrayList<>(Objects.requireNonNull(resultEntity.getBody()).getItems());
 
-            ResponseEntity<VideoStatsJson> statsEntity = restTemplate.getForEntity(fetcherUtil.prepareStatisticsQueryUrl(videos, currentApiKey), VideoStatsJson.class);
+            ResponseEntity<VideoStatsJson> statsEntity = sendRequest(fetcherUtil.prepareStatisticsQueryUrl(videos, currentApiKey), VideoStatsJson.class);
             List<VideoDto> dtoList = fetcherUtil.prepareVideoListWithData(videos, Objects.requireNonNull(statsEntity.getBody()).getItems());
             result.addAll(dtoList);
+
             if (checkDateCondition(resultEntity.getBody())) {
                 nextPageToken = resultEntity.getBody().getNextPageToken();
             }
+
             log.info("{} video fetched, channel: {}", resultEntity.getBody().getItems().size(), channel.getId());
         } catch (HttpClientErrorException e) {
-            e.printStackTrace();
             if (e.getStatusCode().equals(HttpStatus.FORBIDDEN)) {
                 log.info("Quota exceeded");
                 switchApiKey();
+            } else {
+                throw new FetchingVideoException(channel, e.getMessage());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new FetchingVideoException(channel, e.getMessage());
         }
+
         if (Objects.nonNull(nextPageToken)) {
             fetchVideos(requestUrl + "&pageToken=" + nextPageToken, result, channel);
         }
@@ -77,6 +81,10 @@ public class VideoFetcherImpl implements VideoFetcher {
     private boolean checkDateCondition(VideoResultPageJson json) {
         Video lastVideoPage = json.getItems().get(json.getItems().size() - 1);
         return lastVideoPage.getSnippet().getPublishedAt().isAfter(ZonedDateTime.now().minusDays(daysBefore));
+    }
+
+    private <T> ResponseEntity<T> sendRequest(String requestUrl, Class<T> responseType) throws HttpClientErrorException {
+        return restTemplate.getForEntity(requestUrl, responseType);
     }
 
 }

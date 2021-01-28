@@ -51,6 +51,13 @@ public class ChannelServiceImpl implements ChannelService {
         return channels;
     }
 
+    @Override
+    public void updateChannelWhenErrorOccur(Channel channel) {
+        channel.setLastExecution(ZonedDateTime.now().minusDays(7));
+        channelRepository.save(channel);
+        log.info("Channel updated");
+    }
+
     private void fillChannel(Channel channel) {
         channel.setEnabledToCrawl(true);
         channel.setUrl(YOUTUBE_CHANNEL_URL_PREFIX + channel.getId());

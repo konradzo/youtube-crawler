@@ -22,11 +22,12 @@ public class YoutubeCrawlerApplication {
 												 VideoHandler videoHandler,
 												 ChannelVideosTransformer videosTransformer,
 												 ElasticChannel elasticChannel,
-												 EmptyListFilter emptyListFilter){
+												 EmptyListFilter emptyListFilter,
+												 CustomErrorHandler errorHandler){
 		return IntegrationFlows
 				.from(channelProducer, e -> e.poller(p -> {
 					PollerSpec pollerSpec = p.fixedDelay(60, TimeUnit.SECONDS);
-//					pollerSpec.errorHandler(errorHandler);
+					pollerSpec.errorHandler(errorHandler);
 					return pollerSpec;
 				}))
 				.handle(videoHandler)
